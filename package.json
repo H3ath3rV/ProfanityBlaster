@@ -7,7 +7,8 @@
     "start": "electron .",
     "build": "electron-builder",
     "dist": "electron-builder --publish=never",
-    "pack": "electron-builder --dir"
+    "pack": "electron-builder --dir",
+    "dev": "electron . --dev"
   },
   "keywords": [
     "profanity",
@@ -20,11 +21,11 @@
   "author": "Your Name",
   "license": "MIT",
   "devDependencies": {
-    "electron": "^28.0.0",
-    "electron-builder": "^24.0.0"
+    "electron": "^28.3.3",
+    "electron-builder": "^24.13.3"
   },
   "build": {
-    "appId": "com.yourname.profanity-blaster",
+    "appId": "com.profanityblaster.app",
     "productName": "Profanity Blaster",
     "directories": {
       "output": "dist"
@@ -32,35 +33,33 @@
     "files": [
       "main.js",
       "index.html",
-      "package.json"
+      "package.json",
+      "assets/**/*"
     ],
     "mac": {
+      "icon": "assets/icon.icns",
       "category": "public.app-category.utilities",
       "target": [
         {
           "target": "dmg",
-          "arch": [
-            "x64",
-            "arm64"
-          ]
+          "arch": ["x64", "arm64"]
         }
-      ],
-      "icon": "assets/icon.icns"
+      ]
+    },
+    "win": {
+      "icon": "assets/icon.ico",
+      "target": "nsis"
+    },
+    "linux": {
+      "icon": "assets/icon.png",
+      "target": "AppImage"
     },
     "dmg": {
       "title": "Profanity Blaster",
       "icon": "assets/icon.icns",
       "contents": [
-        {
-          "x": 110,
-          "y": 150
-        },
-        {
-          "x": 440,
-          "y": 150,
-          "type": "link",
-          "path": "/Applications"
-        }
+        { "x": 110, "y": 150 },
+        { "x": 440, "y": 150, "type": "link", "path": "/Applications" }
       ]
     }
   }
